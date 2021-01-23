@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: todo-ui-deployment
+ labels:
+  app: todo-ui
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: todo-ui
+  template:
+   metadata:
+    labels:
+     app: todo-ui
+   spec:
+    containers:
+     - name: todo-ui-container
+       image: localhost:32000/todo-ui:v1
+       ports:
+        - containerPort: 80

@@ -25,7 +25,7 @@ SECRET_KEY = 'l4y@!^rox=b*!x-qd9xa*nt%r$$zcp!p_d&1gh@b99s-#iqsj&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'todo_sc',
-        'USER': 'dbadmin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': os.getenv("POSTGRESQL_DATABASE"),
+        'USER': os.getenv("POSTGRESQL_USERNAME"),
+        'PASSWORD': os.getenv("POSTGRESQL_PASSWORD"),
+        'HOST': os.getenv("POSTGRESQL_HOST"),
+        'PORT': os.getenv("POSTGRESQL_PORT")
     }
 }
 
