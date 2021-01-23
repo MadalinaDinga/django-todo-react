@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: todo-ui-service
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
-      nodePort: 3000
+      nodePort: 30002
       port: 8091
       targetPort: 80
   selector:
