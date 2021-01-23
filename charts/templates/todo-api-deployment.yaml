@@ -16,7 +16,7 @@ spec:
    spec:
     containers:
      - name: todo-api-container
-       image: localhost:32000/todo-app:v1
+       image: localhost:32000/todo-api:latest
        env:
         - name: POSTGRESQL_NAME_OVERRIDE
           value: "{{ .Values.postgresql.nameOverride }}"
@@ -31,8 +31,8 @@ spec:
         - name: POSTGRESQL_REPLICATION
           value: "{{ .Values.postgresql.replication.enabled }}"
         - name: POSTGRESQL_HOST
-          value: "{{ .Values.postgresql.host }}"
+          value: "{{ .Release.Name }}-{{ .Values.postgresql.nameOverride }}"
         - name: POSTGRESQL_PORT
           value: "{{ .Values.postgresql.port }}"
        ports:
-        - containerPort: 5000
+        - containerPort: {{ .Values.apiPort }}

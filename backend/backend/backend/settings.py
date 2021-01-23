@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l4y@!^rox=b*!x-qd9xa*nt%r$$zcp!p_d&1gh@b99s-#iqsj&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("POSTGRESQL_DATABASE"),
-        'USER': os.getenv("POSTGRESQL_USERNAME"),
-        'PASSWORD': os.getenv("POSTGRESQL_PASSWORD"),
-        'HOST': os.getenv("POSTGRESQL_HOST"),
-        'PORT': os.getenv("POSTGRESQL_PORT")
+                'NAME': os.getenv("POSTGRESQL_DATABASE", "todo"),
+        'USER': os.getenv("POSTGRESQL_USERNAME", "dbadmin"),
+        'PASSWORD': os.getenv("POSTGRESQL_PASSWORD", "admin"),
+        'PORT': os.getenv("POSTGRESQL_PORT", "5432"),
+        'HOST': os.getenv("POSTGRESQL_HOST", "localhost")
     }
 }
 
@@ -134,6 +134,8 @@ STATIC_URL = '/static/'
 
 
 # we whitelist localhost:3000 because that's where frontend will be served
-CORS_ORIGIN_WHITELIST = (
-     'http://localhost:3000',
- )
+# CORS_ORIGIN_WHITELIST = (
+#      'http://localhost:3000',
+#  )
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False

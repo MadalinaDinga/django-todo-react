@@ -5,7 +5,6 @@ postgresql:
   postgresqlDatabase: todo
   persistence.enabled: true
   replication.enabled: false
-  host: postgresql
   port: 5432
   resources:
     requests:
@@ -14,4 +13,10 @@ postgresql:
     limits:
       memory: "4096Mi"
       cpu: "0.25"
+
+apiPort: 8081
+webPort: 3000
+
+backend:
+  apiName: todo-api-service
 
