@@ -35,4 +35,4 @@ spec:
         - name: POSTGRESQL_PORT
           value: "{{ .Values.postgresql.port }}"
        ports:
-        - containerPort: {{ .Values.apiPort }}
+        - containerPort: {{ .Values.api.apiPort }}

@@ -13,10 +13,8 @@ postgresql:
     limits:
       memory: "4096Mi"
       cpu: "0.25"
-
-apiPort: 8081
-webPort: 3000
-
-backend:
+ui:
+  webPort: 3000
+api:
   apiName: todo-api-service
-
+  apiPort: 8081
