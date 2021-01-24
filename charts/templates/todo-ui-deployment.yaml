@@ -17,8 +17,5 @@ spec:
     containers:
      - name: todo-ui-container
        image: localhost:32000/todo-ui
-       env:
-        - name: REACT_APP_API_URL
-          value: "http://{{ .Values.api.apiName }}:{{ .Values.apiPort }}"
        ports:
         - containerPort: {{ .Values.ui.webPort }}

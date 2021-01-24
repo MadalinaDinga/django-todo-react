@@ -14,3 +14,10 @@ spec:
                 name: todo-lb
                 port:
                   number: 3001
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.api.apiName }}
+                port:
+                  number: {{ .Values.api.apiPort }}
