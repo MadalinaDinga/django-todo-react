@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: todo-ui-deployment
+ name: {{ .Values.ui.deployment.name }}
  labels:
-  app: todo-ui
+  app: {{ .Values.ui.labels.app }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.ui.deployment.spec.replicas }}
   selector:
    matchLabels:
-    app: todo-ui
+    app: {{ .Values.ui.labels.app }}
   template:
    metadata:
     labels:
-     app: todo-ui
+     app: {{ .Values.ui.labels.app }}
    spec:
     containers:
-     - name: todo-ui-container
-       image: localhost:32000/todo-ui
+     - name: {{ .Values.ui.deployment.spec.template.spec.containerName }}
+       image: {{ .Values.ui.deployment.spec.template.spec.image }}
        ports:
         - containerPort: {{ .Values.ui.webPort }}

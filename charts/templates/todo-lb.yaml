@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-lb
+  name: {{ .Values.ui.lb.name }}
 spec:
   selector:
-    app: todo-ui
+    app: {{ .Values.ui.labels.app }}
   ports:
     - protocol: TCP
-      nodePort: 30003
-      port: 3001
-      targetPort: 3000
+      nodePort: {{ .Values.ui.lb.ports.nodePort }}
+      port: {{ .Values.ui.lb.ports.port }}
+      targetPort: {{ .Values.ui.lb.ports.targetPort }}
   type: LoadBalancer

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: todo-api-deployment
+ name: {{ .Values.api.deployment.name }}
  labels:
-  app: todo-api
+  app: {{ .Values.api.labels.app }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.api.deployment.spec.replicas }}
   selector:
    matchLabels:
-    app: todo-api
+    app: {{ .Values.api.labels.app }}
   template:
    metadata:
     labels:
-     app: todo-api
+     app: {{ .Values.api.labels.app }}
    spec:
     containers:
-     - name: todo-api-container
-       image: localhost:32000/todo-api:latest
+     - name: {{ .Values.api.deployment.spec.template.spec.containerName }}
+       image: {{ .Values.api.deployment.spec.template.spec.image }}
        env:
         - name: POSTGRESQL_NAME_OVERRIDE
           value: "{{ .Values.postgresql.nameOverride }}"
