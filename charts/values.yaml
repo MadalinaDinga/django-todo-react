@@ -1,4 +1,5 @@
 postgresql:
+  enabled: true # added this
   nameOverride: todo-postgres
   postgresqlPassword: writer
   postgresqlUsername: writer
@@ -15,6 +16,44 @@ postgresql:
       cpu: "0.25"
 ui:
   webPort: 3000
+  labels: 
+    app: todo-ui
+  deployment:
+    name: todo-ui-deployment
+    spec:
+      replicas: 1
+      template:
+        spec:
+          containerName: todo-ui-container
+          image: localhost:32000/todo-ui
+  service:
+    name: todo-ui-service
+    ports:
+      nodePort: 30002
+      port: 3000
+      targetPort: 3000
+  lb:
+    name: todo-lb
+    ports:
+      nodePort: 30003
+      port: 3001
+      targetPort: 3000
+    
 api:
   apiName: todo-api-service
   apiPort: 8081
+  labels:
+    app: todo-api
+  deployment:
+    name: todo-api-deployment
+    spec:
+      replicas: 1
+      template:
+        spec:
+          containerName: todo-api-container
+          image: localhost:32000/todo-api:latest
+  service:
+    name: todo-api-service
+    ports:
+      port: 8081
+      targetPort: 8081

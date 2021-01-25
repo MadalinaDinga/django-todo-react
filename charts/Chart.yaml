@@ -1,6 +1,6 @@
 apiVersion: v2
 name: charts
-description: A Helm chart for Kubernetes
+description: Helm chart for Todo App
 
 type: application
 
