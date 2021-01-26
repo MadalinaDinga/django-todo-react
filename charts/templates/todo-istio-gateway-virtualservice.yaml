@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: todo-istio-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -11,7 +12,10 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - my-todos.com
+    # - "*"
+    tls:
+      httpsRedirect: true
   - port:
       number: 443
       name: https
@@ -20,7 +24,7 @@ spec:
       mode: SIMPLE
       credentialName: tls-secret
     hosts:
-    - "*"
+    - my-todos.com
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -28,7 +32,8 @@ metadata:
   name: todo-lb
 spec:
   hosts:
-  - "*"
+  - my-todos.com
+  # - "*"
   gateways:
   - todo-istio-gateway
   http:
@@ -37,7 +42,26 @@ spec:
         prefix: /
     route:
     - destination:
-        host: todo-lb
+        host: todo-lb.default.svc.cluster.local
         port:
           number: 3001
 ---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: todo-api
+spec:
+  hosts:
+  - my-todos.com
+  # - "*"
+  gateways:
+  - todo-istio-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api
+    route:
+    - destination:
+        host: {{ .Values.api.apiName }}
+        port:
+          number: {{ .Values.api.apiPort }}
