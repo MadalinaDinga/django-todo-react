@@ -42,7 +42,7 @@ spec:
         prefix: /
     route:
     - destination:
-        host: todo-lb.default.svc.cluster.local
+        host: todo-lb
         port:
           number: 3001
 ---
