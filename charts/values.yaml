@@ -24,7 +24,7 @@ ui:
       template:
         spec:
           containerName: todo-ui-container
-          image: localhost:32000/todo-ui
+          image: gcr.io/my-todo-302823/todo-ui
   service:
     name: todo-ui-service
     ports:
@@ -50,7 +50,7 @@ api:
       template:
         spec:
           containerName: todo-api-container
-          image: localhost:32000/todo-api:latest
+          image: gcr.io/my-todo-302823/todo-api:latest
   service:
     name: todo-api-service
     ports:

@@ -1,23 +1,20 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: todo-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-    - host: my-todos.com
+    - host: 34.90.98.32.xip.io
       http:
         paths:
           - path: /
-            pathType: Prefix
             backend:
-              service:
-                name: todo-lb
-                port:
-                  number: 3001
+              serviceName: todo-lb
+              servicePort: 3001
           - path: /api
-            pathType: Prefix
             backend:
-              service:
-                name: {{ .Values.api.apiName }}
-                port:
-                  number: {{ .Values.api.apiPort }}
+              serviceName: {{ .Values.api.apiName }}
+              servicePort: {{ .Values.api.apiPort }}
