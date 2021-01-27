@@ -1,5 +1,4 @@
 postgresql:
-  enabled: true # added this
   nameOverride: todo-postgres
   postgresqlPassword: writer
   postgresqlUsername: writer
