@@ -12,19 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - my-todos.com
-    # - "*"
-    tls:
-      httpsRedirect: true
-  - port:
-      number: 443
-      name: https
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      credentialName: tls-secret
-    hosts:
-    - my-todos.com
+    - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -32,10 +20,9 @@ metadata:
   name: todo-lb
 spec:
   hosts:
-  - my-todos.com
-  # - "*"
+  - "*"
   gateways:
-  - todo-istio-gateway
+  - istio-system/todo-istio-gateway
   http:
   - match:
     - uri:
@@ -46,22 +33,22 @@ spec:
         port:
           number: 3001
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: todo-api
-spec:
-  hosts:
-  - my-todos.com
-  # - "*"
-  gateways:
-  - todo-istio-gateway
-  http:
-  - match:
-    - uri:
-        prefix: /api
-    route:
-    - destination:
-        host: {{ .Values.api.apiName }}
-        port:
-          number: {{ .Values.api.apiPort }}
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: todo-api
+# spec:
+#   hosts:
+#   - "*"
+#   gateways:
+#   - todo-istio-gateway
+#   http:
+#   - match:
+#     - uri:
+#         prefix: /api
+#     route:
+#     - destination:
+#         host: {{ .Values.api.apiName }}
+#         port:
+#           number: {{ .Values.api.apiPort }}
+# ---
