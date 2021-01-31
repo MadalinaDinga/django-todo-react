@@ -38,7 +38,7 @@ ui:
       nodePort: 30003
       port: 3001
       targetPort: 3000
-ui-canary:
+uicanary:
   webPort: 3000
   labels:
     app: todo-ui
@@ -71,7 +71,7 @@ api:
     ports:
       port: 8081
       targetPort: 8081
-api-canary:
+apicanary:
   apiName: todo-api-service
   apiPort: 8081
   labels:

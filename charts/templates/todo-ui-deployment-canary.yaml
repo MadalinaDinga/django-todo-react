@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: {{ .Values.ui-canary.deployment.name }}
+ name: {{ .Values.uicanary.deployment.name }}
  labels:
-  app: {{ .Values.ui-canary.labels.app }}
-  version: {{ .Values.ui-canary.labels.version }}
+  app: {{ .Values.uicanary.labels.app }}
+  version: {{ .Values.uicanary.labels.version }}
 spec:
-  replicas: {{ .Values.ui-canary.deployment.spec.replicas }}
+  replicas: {{ .Values.uicanary.deployment.spec.replicas }}
   selector:
    matchLabels:
-    app: {{ .Values.ui-canary.labels.app }}
-    version: {{ .Values.ui-canary.labels.version }}
+    app: {{ .Values.uicanary.labels.app }}
+    version: {{ .Values.uicanary.labels.version }}
   template:
    metadata:
     labels:
-     app: {{ .Values.ui-canary.labels.app }}
-     version: {{ .Values.ui-canary.labels.version }}
+     app: {{ .Values.uicanary.labels.app }}
+     version: {{ .Values.uicanary.labels.version }}
    spec:
     containers:
-     - name: {{ .Values.ui-canary.deployment.spec.template.spec.containerName }}
-       image: {{ .Values.ui-canary.deployment.spec.template.spec.image }}
+     - name: {{ .Values.uicanary.deployment.spec.template.spec.containerName }}
+       image: {{ .Values.uicanary.deployment.spec.template.spec.image }}
        ports:
-        - containerPort: {{ .Values.ui-canary.webPort }}
+        - containerPort: {{ .Values.uicanary.webPort }}

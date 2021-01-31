@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: {{ .Values.api-canary.deployment.name }}
+ name: {{ .Values.apicanary.deployment.name }}
  labels:
-  app: {{ .Values.api-canary.labels.app }}
-  version: {{ .Values.api-canary.labels.version }}
+  app: {{ .Values.apicanary.labels.app }}
+  version: {{ .Values.apicanary.labels.version }}
 spec:
-  replicas: {{ .Values.api-canary.deployment.spec.replicas }}
+  replicas: {{ .Values.apicanary.deployment.spec.replicas }}
   selector:
    matchLabels:
-    app: {{ .Values.api-canary.labels.app }}
-    version: {{ .Values.api-canary.labels.version }}
+    app: {{ .Values.apicanary.labels.app }}
+    version: {{ .Values.apicanary.labels.version }}
   template:
    metadata:
     labels:
-     app: {{ .Values.api-canary.labels.app }}
-     version: {{ .Values.api-canary.labels.version }}
+     app: {{ .Values.apicanary.labels.app }}
+     version: {{ .Values.apicanary.labels.version }}
    spec:
     containers:
-     - name: {{ .Values.api-canary.deployment.spec.template.spec.containerName }}
-       image: {{ .Values.api-canary.deployment.spec.template.spec.image }}
+     - name: {{ .Values.apicanary.deployment.spec.template.spec.containerName }}
+       image: {{ .Values.apicanary.deployment.spec.template.spec.image }}
        env:
         - name: POSTGRESQL_NAME_OVERRIDE
           value: "{{ .Values.postgresql.nameOverride }}"
@@ -38,4 +38,4 @@ spec:
         - name: POSTGRESQL_PORT
           value: "{{ .Values.postgresql.port }}"
        ports:
-        - containerPort: {{ .Values.api-canary.apiPort }}
+        - containerPort: {{ .Values.apicanary.apiPort }}
