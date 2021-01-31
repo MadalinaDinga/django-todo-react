@@ -15,9 +15,9 @@ postgresql:
       cpu: "0.25"
 ui:
   webPort: 3000
-  labels: 
+  labels:
     app: todo-ui
-    version: V1
+    version: v1
   deployment:
     name: todo-ui-deployment
     spec:
@@ -25,7 +25,7 @@ ui:
       template:
         spec:
           containerName: todo-ui-container
-          image: gcr.io/my-todo-302823/todo-ui:latest
+          image: gcr.io/my-todo-302823/todo-ui:latest #Change project name to your own project: gcr.io/[Project name]/[image]:latest
   service:
     name: todo-ui-service
     ports:
@@ -38,11 +38,11 @@ ui:
       nodePort: 30005
       port: 3001
       targetPort: 3000
-canary:
+ui-canary:
   webPort: 3000
   labels:
     app: todo-ui
-    version: V3
+    version: v1
   deployment:
     name: todo-ui-deployment-canary
     spec:
@@ -50,12 +50,13 @@ canary:
       template:
         spec:
           containerName: todo-ui-container
-          image: gcr.io/my-todo-302823/todo-ui:V3
+          image: gcr.io/my-todo-302823/todo-ui:latest #Change project name to your own project: gcr.io/[Project name]/[image]:latest
 api:
   apiName: todo-api-service
   apiPort: 8081
   labels:
     app: todo-api
+    version: v1
   deployment:
     name: todo-api-deployment
     spec:
@@ -63,9 +64,23 @@ api:
       template:
         spec:
           containerName: todo-api-container
-          image: gcr.io/my-todo-302823/todo-api:latest
+          image: gcr.io/my-todo-302823/todo-api:latest #Change project name to your own project: gcr.io/[Project name]/[image]:latest
   service:
     name: todo-api-service
     ports:
       port: 8081
       targetPort: 8081
+api-canary:
+  apiName: todo-api-service
+  apiPort: 8081
+  labels:
+    app: todo-api
+    version: v1
+  deployment:
+    name: todo-api-deployment
+    spec:
+      replicas: 0
+      template:
+        spec:
+          containerName: todo-api-container
+          image: gcr.io/my-todo-302823/todo-api:latest #Change project name to your own project: gcr.io/[Project name]/[image]:latest
