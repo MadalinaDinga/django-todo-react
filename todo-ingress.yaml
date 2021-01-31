@@ -12,7 +12,7 @@ spec:
         backend:
           serviceName: todo-lb
           servicePort: 3001
-     # - path: /api
-       ## backend:
-         # serviceName: {{ .Values.api.apiName }}
-         # servicePort: {{ .Values.api.service.ports.port }}
+      - path: /api
+        backend:
+          serviceName: todo-api-service
+          servicePort: 8081

@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ .Values.api.service.name }}
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
       port: {{ .Values.api.service.ports.port }}

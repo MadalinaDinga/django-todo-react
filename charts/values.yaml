@@ -17,14 +17,15 @@ ui:
   webPort: 3000
   labels: 
     app: todo-ui
+    version: V1
   deployment:
     name: todo-ui-deployment
     spec:
-      replicas: 1
+      replicas: 6
       template:
         spec:
           containerName: todo-ui-container
-          image: gcr.io/my-todo-302823/todo-ui
+          image: gcr.io/my-todo-302823/todo-ui:latest
   service:
     name: todo-ui-service
     ports:
@@ -34,10 +35,22 @@ ui:
   lb:
     name: todo-lb
     ports:
-      nodePort: 30003
+      nodePort: 30005
       port: 3001
       targetPort: 3000
-    
+canary:
+  webPort: 3000
+  labels:
+    app: todo-ui
+    version: V3
+  deployment:
+    name: todo-ui-deployment-canary
+    spec:
+      replicas: 0
+      template:
+        spec:
+          containerName: todo-ui-container
+          image: gcr.io/my-todo-302823/todo-ui:V3
 api:
   apiName: todo-api-service
   apiPort: 8081

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Values.canary.deployment.name }}
+ labels:
+  app: {{ .Values.canary.labels.app }}
+spec:
+  replicas: {{ .Values.canary.deployment.spec.replicas }}
+  selector:
+   matchLabels:
+    app: {{ .Values.canary.labels.app }}
+  template:
+   metadata:
+    labels:
+     app: {{ .Values.canary.labels.app }}
+   spec:
+    containers:
+     - name: {{ .Values.canary.deployment.spec.template.spec.containerName }}
+       image: {{ .Values.canary.deployment.spec.template.spec.image }}
+       ports:
+        - containerPort: {{ .Values.canary.webPort }}
