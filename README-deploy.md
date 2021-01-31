@@ -1,7 +1,6 @@
 ## Create a Kubernetes Deployment
 
 #### Helm
-TODO: intro - why helm?
 
 Go to the helm chart directory `cd charts/`.
 1. Make sure the provided values are all correct in `values.yaml`.
