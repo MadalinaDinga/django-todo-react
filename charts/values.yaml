@@ -15,8 +15,9 @@ postgresql:
       cpu: "0.25"
 ui:
   webPort: 3000
-  labels: 
+  labels:
     app: todo-ui
+    version: v1
   deployment:
     name: todo-ui-deployment
     spec:
@@ -24,7 +25,7 @@ ui:
       template:
         spec:
           containerName: todo-ui-container
-          image: localhost:32000/todo-ui
+          image: localhost:32000/todo-ui:latest
   service:
     name: todo-ui-service
     ports:
@@ -37,12 +38,26 @@ ui:
       nodePort: 30003
       port: 3001
       targetPort: 3000
-    
+ui-canary:
+  webPort: 3000
+  labels:
+    app: todo-ui
+    version: v1
+  deployment:
+    name: todo-ui-deployment-canary
+    spec:
+      replicas: 0
+      template:
+        spec:
+          containerName: todo-ui-container
+          image: localhost:32000/todo-ui
+
 api:
   apiName: todo-api-service
   apiPort: 8081
   labels:
     app: todo-api
+    version: v1
   deployment:
     name: todo-api-deployment
     spec:
@@ -56,3 +71,17 @@ api:
     ports:
       port: 8081
       targetPort: 8081
+api-canary:
+  apiName: todo-api-service
+  apiPort: 8081
+  labels:
+    app: todo-api
+    version: v1
+  deployment:
+    name: todo-api-deployment-canary
+    spec:
+      replicas: 0
+      template:
+        spec:
+          containerName: todo-api-container
+          image: localhost:32000/todo-api:latest
